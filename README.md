@@ -1,5 +1,5 @@
 ![Image Pearer](https://github.com/Sirosky/Image-Pearer/assets/2752448/960a807d-15d7-4f0d-9943-e82abc204986) 
-# Image-Pearer
+# Image Pearer
 
 Image Pearer automates the creation of image pairs from a LR and a HR source for neural network model training. The primary use case is for pairing images from a DVD to images from a BD, for example. Image Pearer is not intended to be an "all-in-one" tool, but helps eliminate the tedium of manually creating datasets from LR/HR sources.
 
