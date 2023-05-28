@@ -1,19 +1,28 @@
 #python image_pearer.py
 
-# Import libraries
+#------------------------#
+#IMPORT LIBRARIES
+#------------------------#
 import cv2
 import skimage.metrics
 import os
 import shutil
 
-# Options
+#------------------------#
+#OPTIONS
+#------------------------#
+
 lr_path = "lr_extracted" # Path to LR folder
 hr_path = "hr_extracted" # Path to HR folder
 output_lr_path = "LR" # Path to output LR folder
 output_hr_path = "HR" # Path to output HR folder
-ssim_threshold = 0.9 # Define SSIM threshold
-num_images = 5 # Define number of images to check in either direction
-prepend_string = "" # Define string to prepend to image name
+ssim_threshold = 0.9 # Define SSIM threshold. Up to 1.0. Higher = stricter requirements to create an image pair. You may have to adjust depending on the source, but the default of 0.9 should be a good starting point.
+num_images = 5 # Define number of images to check in either direction. Increase to search further for an image to pair with. This might be necessary if a low scene detect certainty was used in the image extraction stage. Note that increasing the value decreases speed. The default of 5 should be a good starting point.
+prepend_string = "" # Define a string to prepend to image name. For example, putting "blah" would result in output images such as "blah_000001.png".
+
+#------------------------#
+#SCRIPT
+#------------------------#
 
 # Check if output_lr_path and output_hr_path exist and create them if they don't
 if not os.path.exists(output_lr_path):
