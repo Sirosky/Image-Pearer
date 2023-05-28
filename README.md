@@ -25,7 +25,7 @@ Use FFMPEG or a similar tool to extract images based on scene detection. For exa
 1. Review the OPTIONS section at the top of the script to ensure the paths are correct. The default starting value for SSIM and image numbers should be fine, but tweak as needed.
 2. Run with `python image_pearer.py`. If successful, you should see the script printing out results and the image pairs created in the output directories.
 
-## 4. ImgAlign (Optional)
+## 4. ImgAlign
 *Probably the easiest method of making sure the pairs are aligned accurately.*
 
 [ImgAlign](https://github.com/sonic41592/ImgAlign) is a helpful tool for making sure image pairs match each other accurately. For example, oftentimes BDs aren't exactly 2x the resolution of DVDs, which is something ImgAlign can fix. It can also automatically crop and warp as needed to align image pairs. ImgAlign is straightforward to use-- simply follow the documentation on the Github page.
