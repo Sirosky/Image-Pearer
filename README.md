@@ -11,7 +11,7 @@ The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.co
 # How to Use
 
 ## 1. Installation
-1. Download the script.
+1. Download the [script](https://github.com/Sirosky/Image-Pearer/blob/main/image_pearer.py).
 2. Ensure all dependencies are installed: `cv2` and `skimage.metrics`.
 
 ## 2. Extract Images
