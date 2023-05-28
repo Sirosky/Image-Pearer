@@ -16,8 +16,8 @@ lr_path = "lr_extracted" # Path to LR folder
 hr_path = "hr_extracted" # Path to HR folder
 output_lr_path = "LR" # Path to output LR folder
 output_hr_path = "HR" # Path to output HR folder
-ssim_threshold = 0.9 # Define SSIM threshold. Up to 1.0. Higher = stricter requirements to create an image pair. You may have to adjust depending on the source, but the default of 0.9 should be a good starting point.
-num_images = 5 # Define number of images to check in either direction. Increase to search further for an image to pair with. This might be necessary if a low scene detect certainty was used in the image extraction stage. Note that increasing the value decreases speed. The default of 5 should be a good starting point.
+ssim_threshold = 0.9 # Define SSIM threshold. Up to 1.0. Higher = stricter requirements to create an image pair. You may have to adjust depending on the source.
+num_images = 5 # Define number of images to check in either direction. Increase to search further for an image to pair with. This might be necessary if scene detect is generating vastly different results between the LR and HR sources. Note that increasing the value decreases speed.
 prepend_string = "" # Define a string to prepend to image name. For example, putting "blah" would result in output images such as "blah_000001.png".
 
 #------------------------#
@@ -41,10 +41,12 @@ output_index = 1
 
 # Loop through each image in LR folder
 for lr_index, lr_image in enumerate(lr_images):
+    
     # Read LR image
     lr_image_path = os.path.join(lr_path, lr_image)
     lr_image_data = cv2.imread(lr_image_path)
-
+    # print(f"Current index {lr_index}")
+    
     # Convert LR image to grayscale
     lr_image_data = cv2.cvtColor(lr_image_data, cv2.COLOR_BGR2GRAY)
 
@@ -53,12 +55,14 @@ for lr_index, lr_image in enumerate(lr_images):
 
     # Get the list of image names in HR folder
     hr_images = os.listdir(hr_path)
+    # print(f"Debug: Current lr_image {lr_image}. Current hr_image {hr_image}.")
 
     # Try to get the index of the HR image in the HR folder
     try:
         hr_index = hr_images.index(hr_image)
     except ValueError:
         # If not found, use the index of the LR image instead
+        # print(f"Debug: HR image {hr_index} not found. Switching to {lr_index}.")
         hr_index = lr_index
 
     # Initialize the best SSIM score and image name
@@ -120,8 +124,10 @@ for lr_index, lr_image in enumerate(lr_images):
             # Increment the total image pairs created by 1
             total_pairs += 1
 
-            # Increment the output image index by 1
-            output_index += 1
+        # Increment the output image index by 1
+        output_index += 1
+    else:
+        print(f"Did not locate a pair for {lr_image}. Highest SSIM was {best_ssim} from {best_hr_image}.")
 
 # Print a message with the total image pairs created at the end
 print(f"Total image pairs created: {total_pairs}")
