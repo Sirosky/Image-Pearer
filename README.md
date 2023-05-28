@@ -5,7 +5,7 @@ Image Pearer automates the creation of image pairs from a LR and a HR source for
 
 The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.com/sonic41592/ImgAlign) installed, and an understanding of how to use each.
 
-![Infographic](https://github.com/Sirosky/Image-Pearer/assets/2752448/97e5edeb-4be9-43fe-be10-83020376a5fa)
+![Infographic](https://github.com/Sirosky/Image-Pearer/assets/2752448/496c930e-fb99-4bf4-8dd3-efbac47f8955)
 
 ***
 # How to Use
