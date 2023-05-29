@@ -35,4 +35,4 @@ The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.co
 # Credits
 
 - Written with the help of ChatGPT.
-- Image Pearer uses ORB and AKAZE for image feature matching.
+- Image Pearer uses SSIM, ORB and AKAZE for image feature matching.
