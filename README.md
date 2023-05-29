@@ -31,4 +31,8 @@ The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.co
 
 [ImgAlign](https://github.com/sonic41592/ImgAlign) is a helpful tool for making sure image pairs match each other accurately. For example, oftentimes BDs aren't exactly 2x the resolution of DVDs, which is something ImgAlign can fix. It can also automatically crop and warp as needed to align image pairs. ImgAlign is straightforward to use-- simply follow the documentation on the Github page.
 
+***
+# Credits
 
+- Written with the help of ChatGPT.
+- Image Pearer uses ORB and AKAZE for image feature matching.
