@@ -23,7 +23,7 @@ The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.co
 ## 3. Execute
 *With the images extracted, you can prepare to run the script.*
 
-1. Review the OPTIONS section at the top of the script to ensure the paths are correct. The default starting value for SSIM and image numbers should be fine, but tweak as needed.
+1. Review the OPTIONS section at the top of the script to ensure the paths are correct. A good rule of thumb is making sure that the image search range in `num_images` is at least equal to the difference in the HR/LR sequence sizes. You can also do a test run by setting the threshold to a very high value (e.g. 1.0) and seeing what values your dataset is averaging. Then, fine tune the threshold value accordingly.
 2. Run with `python image_pearer.py`. If successful, you should see the script printing out results and the image pairs created in the output directories.
 
 ## 4. ImgAlign
