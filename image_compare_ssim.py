@@ -1,4 +1,4 @@
-#python image_compare_akaze.py
+#python image_compare_ssim.py
 
 #------------------------#
 #OPTIONS
@@ -6,9 +6,9 @@
 
 folder1 = "Output/HR" #Folder containing HR images aligned by ImgAlign
 folder2 = "Output/LR" #Folder containing LR images aligned by ImgAlign
-folder3 = "Output/LR_low_score_akaze" #Output folders
-folder4 = "Output/HR_low_score_akaze"
-threshold = 0.7 # Set the threshold for matching score
+folder3 = "Output/LR_low_score_ssim" #Output folders
+folder4 = "Output/HR_low_score_ssim"
+threshold = 0.6 # Set the threshold for matching score
 
 #------------------------#
 #IMPORT LIBRARIES
@@ -18,14 +18,11 @@ import cv2
 import os
 import numpy as np
 from tqdm import tqdm
+from skimage.metrics import structural_similarity as ssim # Import SSIM function
 
 #------------------------#
 #SCRIPT
 #------------------------#
-
-# Initialize AKAZE detector and matcher
-akaze = cv2.AKAZE_create()
-bf = cv2.BFMatcher(cv2.NORM_HAMMING)
 
 if not os.path.exists(folder3):
     os.makedirs(folder3)
@@ -57,54 +54,18 @@ for img1 in tqdm(images1, position=0, leave=True):
         img1_resized = cv2.resize(img1_gray, (w, h))
         img2_resized = cv2.resize(img2_gray, (w, h))
 
-        # Detect and compute AKAZE keypoints and descriptors
-        kp1, des1 = akaze.detectAndCompute(img1_resized, None)
-        kp2, des2 = akaze.detectAndCompute(img2_resized, None)
-        
-        # Filter out the images with no keypoints
-        if des1 is None or des2 is None:
-            continue
-        
-        # Convert the descriptors to the same type
-        des1 = np.array(des1, dtype=np.uint8)
-        des2 = np.array(des2, dtype=np.uint8)
+        # Calculate the SSIM score between the two images
+        # Make sure the images have the same data range
+        score = ssim(img1_resized, img2_resized, data_range=255)
 
-        # Match the descriptors using brute force matcher with Hamming distance
-        matches = bf.knnMatch(des1,des2, k=2)
-
-        # Apply ratio test
-        good = []
-        for match in matches:
-            # Check if there are enough values to unpack
-            if len(match) == 2:
-                m, n = match
-                if m.distance < 0.75 * n.distance:
-                    good.append([m])
-            else:
-                # Skip the image pair if not enough matches are found
-                continue
-
-        # Calculate the matching score as the ratio of good matches to total keypoints
-        # Add a check to avoid dividing by zero
-        if len(kp1) > 0 and len(kp2) > 0:
-            score = len(good) / max(len(kp1), len(kp2))
-        else:
-            score = 0
-        # print(f"{img1}: {score:.2f}")
         # Append the image name and score to the list if it is less than the threshold
         if score < threshold:
             low_score_images.append((img1, score))
 
 # Print the list of low score images
-print(f"The following images have a score less than {threshold}:")
+print("The following images have a SSIM score less than the threshold:")
 for img, score in low_score_images:
     print(f"{img}: {score:.2f}")
-
-# Create the folders if they do not exist
-if not os.path.exists(folder3):
-    os.makedirs(folder3)
-if not os.path.exists(folder4):
-    os.makedirs(folder4)
 
 # Loop through the low score images and move them to the corresponding folders
 for img, score in low_score_images:

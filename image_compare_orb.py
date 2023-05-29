@@ -1,22 +1,31 @@
 #python image_compare_orb.py
 
+#------------------------#
+#OPTIONS
+#------------------------#
+
+folder1 = "Output/HR" #Folder containing HR images aligned by ImgAlign
+folder2 = "Output/LR" #Folder containing LR images aligned by ImgAlign
+folder3 = "Output/LR_low_score_orb" #Output folders
+folder4 = "Output/HR_low_score_orb"
+threshold = 0.2 # Set the threshold for matching score
+
+#------------------------#
+#IMPORT LIBRARIES
+#------------------------#
+
 import cv2
 import os
 import numpy as np
 from tqdm import tqdm
 
+#------------------------#
+#SCRIPT
+#------------------------#
+
 # Initialize ORB detector and matcher
 orb = cv2.ORB_create()
 bf = cv2.BFMatcher(cv2.NORM_HAMMING)
-
-# Set the threshold for matching score
-threshold = 0.2
-
-# Set the paths of the two folders
-folder1 = "Output/HR"
-folder2 = "Output/LR"
-folder3 = "Output/LR_low_score_orb"
-folder4 = "Output/HR_low_score_orb"
 
 # Get the list of image names in each folder
 images1 = os.listdir(folder1)
