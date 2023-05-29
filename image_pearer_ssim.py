@@ -1,4 +1,4 @@
-#python image_pearer.py
+#python image_pearer_ssim.py
 
 #------------------------#
 #IMPORT LIBRARIES
@@ -17,8 +17,8 @@ hr_path = "hr_extracted" # Path to HR folder
 output_lr_path = "LR" # Path to output LR folder
 output_hr_path = "HR" # Path to output HR folder
 ssim_threshold = 0.9 # Define SSIM threshold. Up to 1.0. Higher = stricter requirements to create an image pair. You may have to adjust depending on the source.
-num_images = 5 # Define number of images to check in either direction. Increase to search further for an image to pair with. This might be necessary if scene detect is generating vastly different results between the LR and HR sources. Note that increasing the value decreases speed.
-prepend_string = "" # Define a string to prepend to image name. For example, putting "blah" would result in output images such as "blah_000001.png".
+num_images = 20 # Define number of images to check in either direction. Increase to search further for an image to pair with. This might be necessary if scene detect is generating vastly different results between the LR and HR sources. Note that increasing the value decreases speed.
+prepend_string = "ssim_" # Define a string to prepend to image name. For example, putting "blah" would result in output images such as "blah_000001.png".
 
 #------------------------#
 #SCRIPT
@@ -119,7 +119,7 @@ for lr_index, lr_image in enumerate(lr_images):
             shutil.copy(best_hr_image_path, output_hr_image_path)
 
             # Print a message that a successful image pair was created with LR and HR image names and SSIM score
-            print(f"Created a successful image pair with {new_lr_image} and {new_hr_image} with SSIM: {best_ssim}")
+            print(f"Created a successful image pair with {lr_path}/{lr_image} and {hr_path}/{best_hr_image} with match ratio of {best_match_ratio} as {new_hr_image}.")
 
             # Increment the total image pairs created by 1
             total_pairs += 1
