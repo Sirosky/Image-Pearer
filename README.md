@@ -17,7 +17,8 @@ The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.co
 ## 2. Extract Images
 *For Image Pearer to work, you must first extract the images to be paired from the LR and HR source. The below is the recommended approach.*
 
-Use FFMPEG or a similar tool to extract images based on scene detection. For example, `ffmpeg -i "LR.mkv" -filter_complex "select=bitor(gt(scene\,0.4)\,eq(n\,0))" -vsync drop "lr_extracted/%06d.png"`. Be sure to extract images for both the HRs and the LRs. Scene detect is highly recommended to ensure that the image pairs *roughly* match up in the ordering of the LR and HR image sequences. It also decreases the likelihood of false positives resulting in poorly matching pairs.
+- Use FFMPEG or a similar tool to extract images based on scene detection. For example, `ffmpeg -i "LR.mkv" -filter_complex "select=bitor(gt(scene\,0.4)\,eq(n\,0))" -vsync drop "lr_extracted/%06d.png"`. Be sure to extract images for both the HRs and the LRs **as an image sequence**. Scene detect is highly recommended to ensure that the image pairs *roughly* match up in the ordering of the LR and HR image sequences. It also decreases the likelihood of false positives resulting in poorly matching pairs.
+- When extracting images, a good practice is to make sure the extracted image count the LR and HR images roughly match up. If not, you would have to expand the search range of the script to ensure accurate pairing, which can slow things down drastically.
 
 ## 3. Execute
 *With the images extracted, you can prepare to run the script.*
