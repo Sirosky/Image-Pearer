@@ -119,7 +119,7 @@ for lr_index, lr_image in enumerate(lr_images):
             shutil.copy(best_hr_image_path, output_hr_image_path)
 
             # Print a message that a successful image pair was created with LR and HR image names and SSIM score
-            print(f"Created a successful image pair with {lr_path}/{lr_image} and {hr_path}/{best_hr_image} with match ratio of {best_match_ratio} as {new_hr_image}.")
+            print(f"Created a successful image pair with {lr_path}/{lr_image} and {hr_path}/{best_hr_image} with score of {best_ssim} as {new_hr_image}.")
 
             # Increment the total image pairs created by 1
             total_pairs += 1
