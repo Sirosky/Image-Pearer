@@ -34,7 +34,7 @@ The instructions assume you have Python, FFMPEG and [ImgAlign](https://github.co
 
 ## 5. Double Checking (Optional)
 
-ImgAlign generally does a good job of creating good, matching image pairs. However, you may want to double check the final results with one of the `image_compare_X`. As I generally use AKAZE or ORB for the initial pairing, I like to use SSIM for this final step as unlike AKAZE/ORB, it take a different approach than feature matching so it provides a "second opinion" of sorts. Image pairs with schores that do not meet the prescribed threshold are moved to a separate folder for manual review.
+ImgAlign generally does a good job of creating good, matching image pairs. However, you may want to double check the final results with one of the `image_compare_X`. As I generally use AKAZE or ORB for the initial pairing, I like to use SSIM for this final step as unlike AKAZE/ORB, it take a different approach than feature matching so it provides a "second opinion" of sorts. Image pairs with scores that do not meet the prescribed threshold are moved to a separate folder for manual review.
 
 And with that, you should have a dataset!
 
